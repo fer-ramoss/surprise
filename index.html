@@ -22,6 +22,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            position: relative;
         }
         img {
             max-width: 300px;
@@ -43,6 +44,40 @@
         }
         button:hover {
             background-color: #0056b3;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: float 3s linear infinite;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            top: 0;
+            left: -10px;
+        }
+        @keyframes float {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(-45deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-200px) rotate(-45deg);
+            }
         }
     </style>
 </head>
@@ -68,7 +103,7 @@
     </div>
 
     <div class="container" id="page5">
-        <img src="our_photo.jpeg" alt="Foto nossa">
+        <img src="our_photo.jpg" alt="Foto nossa">
         <h1>Eu te amo muito, nunca se esqueça disso!</h1>
     </div>
 
@@ -77,7 +112,28 @@
             document.querySelectorAll('.container').forEach(container => {
                 container.classList.remove('active');
             });
-            document.getElementById(`page${pageNumber}`).classList.add('active');
+            const nextContainer = document.getElementById(`page${pageNumber}`);
+            nextContainer.classList.add('active');
+
+            if (pageNumber === 5) {
+                startHearts();
+            }
+        }
+
+        function startHearts() {
+            const container = document.getElementById('page5');
+
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                container.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 300);
         }
     </script>
 </body>
