@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surpresa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            display: none;
+            padding: 20px;
+        }
+        .container.active {
+            display: block;
+        }
+        img {
+            max-width: 80%;
+            height: auto;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container active" id="page1">
+        <h1>Adivinha como era minha vida antes de te conhecer?</h1>
+        <button onclick="nextPage(2)">➡</button>
+    </div>
+
+    <div class="container" id="page2">
+        <img src="sad_face.png" alt="Desenho triste">
+        <button onclick="nextPage(3)">➡</button>
+    </div>
+
+    <div class="container" id="page3">
+        <h1>Adivinha como está a minha vida depois de te conhecer?</h1>
+        <button onclick="nextPage(4)">➡</button>
+    </div>
+
+    <div class="container" id="page4">
+        <img src="happy_face.png" alt="Desenho alegre">
+        <button onclick="nextPage(5)">➡</button>
+    </div>
+
+    <div class="container" id="page5">
+        <img src="our_photo.jpg" alt="Foto nossa">
+        <h1>Eu te amo muito, nunca se esqueça disso!</h1>
+    </div>
+
+    <script>
+        function nextPage(pageNumber) {
+            document.querySelectorAll('.container').forEach(container => {
+                container.classList.remove('active');
+            });
+            document.getElementById(`page${pageNumber}`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
